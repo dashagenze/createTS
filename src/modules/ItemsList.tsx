@@ -1,32 +1,35 @@
-import {Link} from "react-router-dom";
-import '../App.css';
-import useFetch from "../hooks/useFetch";
+import '../App.css'
 
-const ITEMSDATA = 'http://localhost:3000/ItemsData/';
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
-const ItemsList = () => {
+import useFetch from '../hooks/useFetch'
 
-    let {itemsList, isLoading} = useFetch(ITEMSDATA)
+const ITEMSDATA = 'http://localhost:3000/ItemsData/'
+
+const ItemsList: FC = () => {
+    const { itemsList, isLoading } = useFetch(ITEMSDATA)
 
     if (isLoading) {
-        return <div>Загружаем товары...</div>;
+        return <div>Загружаем товары...</div>
     }
 
     return (
         <ul>
-            {itemsList &&
+            {Boolean(itemsList) &&
                 itemsList.map((item) => {
-
-                return (
-                    <div key={item.id}>
-                        <li className={'flexItem'}>
-                            <img src={`/assets/${item.img}`} className={'itemIcon'}/>
-                            <Link className={'hover'} to={'/'+item.id}>{item.title}</Link>
-                        </li>
-                        <hr/>
-                    </div>
-                )
-            })}
+                    return (
+                        <div key={item.id}>
+                            <li className="flexItem">
+                                <img className="itemIcon" src={`/assets/${item.img}`} />
+                                <Link className="hover" to={`/${item.id}`}>
+                                    {item.title}
+                                </Link>
+                            </li>
+                            <hr />
+                        </div>
+                    )
+                })}
         </ul>
     )
 }

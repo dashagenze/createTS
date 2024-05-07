@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
+import { IItem } from '../types/IItem.ts'
 
-export default function useFetch (url: string) {
-    const [itemsList, setData] = useState('')
-    const [isLoading, setIsLoading] = useState(null)
+export default function useFetch (url: string): {itemsList: IItem[], isLoading: boolean} {
+    const [itemsList, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect( () => {
         fetch(url)

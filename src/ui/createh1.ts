@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 
-function Welcome({ name }) {
+
+function Welcome({}) {
     return createElement(
         'h1',
         { className: 'greeting' },

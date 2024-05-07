@@ -1,0 +1,47 @@
+{
+  "ItemsData": [
+    {
+      "id": "1",
+      "title": "Очки для компьютера Xiaomi MiJia Blu-ray Goggles Pro Transparent (HMJ02TS) Clear",
+      "img": "xiaomi.jpg",
+      "amount": 1,
+      "price": 1771
+    },
+    {
+      "id": "2",
+      "title": " \"13,3\" Ноутбук Apple MacBook Air M1/8/256 ГБ MGN63 серый",
+      "img": "macbook.jpg",
+      "amount": 1,
+      "price": 74670
+    },
+    {
+      "id": "3",
+      "title": "Черная толстовка как у мистера Робота",
+      "img": "hoodie.jpg",
+      "amount": 1,
+      "price": 3886
+    },
+    {
+      "id": "4",
+      "title": "Стакан для кофе и чая 360 мл",
+      "img": "coffeecup.png",
+      "amount": 1,
+      "price": 827
+    },
+    {
+      "id": "5",
+      "title": "Logitech Мышь беспроводная lift vertical, светло-розовый",
+      "img": "mouse.png",
+      "amount": 1,
+      "price": 7281
+    },
+    {
+      "id": "6",
+      "title": "Витамин Д3 5000 МЕ + К2 50 мкг 60 капсул",
+      "img": "d3.png",
+      "amount": 1,
+      "price": 333
+    }
+  ],
+  "CartItems": []
+}

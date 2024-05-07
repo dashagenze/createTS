@@ -6,7 +6,7 @@ import TasksList from "../modules/TasksList";
 const ShopList = () => {
 
     const [item, setItem] = useState('')
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState<string[]>([])
 
     const addItem = () => {
             if (item !== '') {
@@ -15,21 +15,18 @@ const ShopList = () => {
             setItem('')
     }
 
-    const removeItem = (text) => {
+    const removeItem = (text: string) => {
         const newItems = items.filter((item) => {
             return item !== text
         })
         setItems(newItems)
     }
 
-    const checked = (text) => {
-        text.style.textDecoration = 'strikethrough'
-    }
 
     return (
         <div className={'shopList'}>
             <h1>Список покумпок</h1>
-            <TasksList list={items} onChecked={() => checked()} remove={removeItem} />
+            <TasksList list={items}  remove={removeItem} />
             <TextInput item={item} setItem={setItem} addItem={addItem}/>
             {/*<Button onClick={() => pressList()} purpose={'Посмотреть список'}/>*/}
         </div>

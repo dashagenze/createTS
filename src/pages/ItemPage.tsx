@@ -1,21 +1,23 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import '../App.css'
 import Button from "../ui/Button";
 import {Link, useNavigate, useParams} from "react-router-dom";
+import { IItem } from '../types/IItem.ts'
+
 const LINKTOCART = 'http://localhost:3000/CartItems/'
 const LINK = 'http://localhost:3000/ItemsData/'
 
 const ItemPage = () => {
 
-    const [item, setItem] = useState('');
-    const [amount, setAmount] = useState(1)
-    let [itemId, setItemId] = useState(null)
+    const [item, setItem] = useState<IItem>({id: 'item', price: 0, img: '', amount: 0, isInCart: false, title: '', description: ''});
+    const [amount, setAmount] = useState(0)
+    let [itemId, setItemId] = useState('')
     const params = useParams();
     const navigate = useNavigate();
 
 
     useEffect(() => {
-        setItemId(params.id);
+        setItemId(params.id || '');
         try {
             if(!itemId) return
             fetch(LINK + itemId)
@@ -27,6 +29,7 @@ const ItemPage = () => {
                 .then(result => {
                     setItem(result)
                     setAmount(item.amount)
+                    console.log(amount)
                 })
         } catch (e) {navigate('/superError')}
     }, [itemId]);

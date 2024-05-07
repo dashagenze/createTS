@@ -3,12 +3,14 @@ import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Item from "../modules/Item";
 import Button from "../ui/Button";
+import { IItem } from '../types/IItem.ts'
+
 
 const LINKTOCART = 'http://localhost:3000/CartItems'
 const Cart = () => {
 
-    const [cartItems, setCartItems] = useState(null);
-    const [total, setTotal] = useState(null);
+    const [cartItems, setCartItems] = useState<IItem[]> ([]);
+    const [total, setTotal] = useState(0);
     const navigate = useNavigate();
     const initialValue = 0;
 
@@ -18,11 +20,11 @@ const Cart = () => {
             .then(response => response.json())
             .then(result => {
                 setCartItems(result)
+                if (!result.length) {
+                    navigate('/error/emptycart')
+                }
                 console.log(cartItems)
 
-                // {cartItems && cartItems.map((item) => {
-                //     setTotal(total + item.price)
-                // })}
             })
             .catch(e=> console.log(e))
     }, []);
@@ -31,11 +33,13 @@ const Cart = () => {
         fetch(LINKTOCART)
             .then(response => response.json())
             .then(result => {
-                if (!cartItems.length) {
+                console.log(result)
+
+                if (!result.length) {
                     navigate('/error/emptycart')
                 }
 
-                setTotal(cartItems.reduce((totalPrice,currentItem) => {
+                setTotal(cartItems.reduce((totalPrice: number, currentItem: {price: number, amount: number}) => {
                     totalPrice += (currentItem.price * currentItem.amount)
                     return totalPrice
                 }, initialValue))
@@ -45,12 +49,15 @@ const Cart = () => {
     }, [cartItems]);
 
 
-const removeFromCart = async (id) => {
+
+const removeFromCart = async (id: string) => {
     await fetch(LINKTOCART+'/'+id, {
         method: 'DELETE'
     })
         .then(r => r.json())
         .then(newItems => {
+
+            console.log(newItems)
             fetch(LINKTOCART)
                 .then(r => r.json())
                 .then(r => setCartItems(r))

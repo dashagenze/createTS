@@ -17,7 +17,7 @@ import ItemsList from "../modules/ItemsList.tsx";
 
 const Home = () => {
 
-    const [user, setUser] = useState({})
+    const [_user] = useState({name:''})
 
     return (
         <div >
@@ -27,7 +27,7 @@ const Home = () => {
                     <Link to={'/profile'}>ЛИЧНЫЙ КАБИНЕТ</Link>
                 </div>
 
-                <Welcome name={user.name}/>
+                <Welcome />
 
                 <ShopList/>
                 <img src={programmer} className={'progPic'}/>
