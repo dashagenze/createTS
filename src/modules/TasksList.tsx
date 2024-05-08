@@ -1,5 +1,11 @@
 import '../App.css'
-const TasksList = ( {list, remove} ) => {
+
+interface Props {
+    list: string[];
+    remove: (entry: string)=> void
+}
+
+const TasksList = ( {list, remove}: Props ) => {
 
     return (
         <>

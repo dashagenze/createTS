@@ -1,5 +1,8 @@
-
-const SearchInput = ( {searchValue, setValue}) => {
+interface SearchTypes {
+    searchValue: string;
+    setValue: (searchValue: string) => void;
+}
+const SearchInput = ( {searchValue, setValue} : SearchTypes) => {
 
     return (
         <div>

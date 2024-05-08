@@ -43,5 +43,14 @@
       "price": 333
     }
   ],
-  "CartItems": []
+  "CartItems": [
+    {
+      "id": "1",
+      "title": "Очки для компьютера Xiaomi MiJia Blu-ray Goggles Pro Transparent (HMJ02TS) Clear",
+      "price": 1771,
+      "img": "xiaomi.jpg",
+      "amount": 1,
+      "isInCart": true
+    }
+  ]
 }

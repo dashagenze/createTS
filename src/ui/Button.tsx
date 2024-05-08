@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Props {
     style?: React.CSSProperties;
-    press: () => any | undefined;
+    press: () => void | undefined | Promise<void>;
     purpose: string
 }
 

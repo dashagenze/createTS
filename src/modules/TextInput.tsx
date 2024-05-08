@@ -1,8 +1,10 @@
 import '../App.css'
 
-// interface Props {
-//     item:
-// }
+interface Props {
+    item: string;
+    setItem: (item: string) => void;
+    addItem: (item: string) => void;
+}
 function TextInput ( {item, setItem, addItem}: Props) {
     return (
         <div>
@@ -15,7 +17,7 @@ function TextInput ( {item, setItem, addItem}: Props) {
                     setItem(e.target.value)
                 }}
             />
-            <button className={'listBtn'} onClick={addItem}>добавить</button>
+            <button className={'listBtn'} onClick={() => addItem}>добавить</button>
 
         </div>
     )

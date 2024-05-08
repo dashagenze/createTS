@@ -1,18 +1,23 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import '../App.css'
+// @ts-ignore
 import hi from '../assets/hi.png'
 import {Link} from "react-router-dom";
-import cartImg from "../assets/shopping_cart.png";
+// @ts-ignore
+import cartImg from '../assets/shopping_cart.png'
 
+type Profile = (name: string, surname: string) => { };
+type SetFunc = (set: (e: string)=> void, e: React.ChangeEvent<HTMLInputElement>) => void;
+type SubmitFunc = () => void
 
 function Profile() {
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState<string>('');
     const [surname, setSurname] = useState('');
-    const [counter, setCounter] = useState(null)
-    const [user, setUser] = useState(null)
+    // const [counter, setCounter] = useState(null)
+    const [user, setUser] = useState({  })
 
-    const createUser = useCallback((name, surname) => {
+    const createUser: Profile = useCallback((name, surname) => {
         const user = {name, surname};
         console.log(user)
         return user
@@ -20,14 +25,14 @@ function Profile() {
 
     const genUser = useMemo(()=> createUser(name, surname), [name, surname])
 
-    const submit = () => {
+    const submit: SubmitFunc = () => {
         if(name && surname) {
             setUser(genUser)
             console.log(user);
         } else if (!name && !surname) { alert('введите данные')}
     }
 
-    const onNameChange = (set, e) => {
+    const onNameChange: SetFunc = (set, e) => {
         set(e.target.value)
     }
 
@@ -54,7 +59,7 @@ function Profile() {
                     </label>
 
                     <br/>
-                    <button onClick={() => submit(name, surname)} className={'listBtn'}>изменить</button>
+                    <button onClick={() => submit()} className={'listBtn'}>изменить</button>
 
                 </div>
             </div>
