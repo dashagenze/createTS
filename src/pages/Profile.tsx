@@ -25,7 +25,7 @@ function Profile() {
     const surname = useSelector((state: RootState) => state.profile.surname)
     const dispatch = useDispatch<AppDispatch>();
     const theme = localStorage.getItem('theme');
-    
+
 
 
     const submit: OnChangeFunction = () => {
@@ -40,7 +40,10 @@ function Profile() {
 
     const edit: OnChangeFunction = () => {
         const inputField  = document.getElementById('inputField');
+        const editbtn = document.getElementById('editBtn')
         if (inputField) inputField.style.display = 'block';
+        if (editbtn) editbtn.style.display = 'none';
+        
 
     }
 
@@ -81,7 +84,7 @@ function Profile() {
                         <button onClick={() => submit()} className={'listBtn'}>подтвердить</button>
                     </div>
 
-                    <button onClick={() => edit()} className={'listBtn'}>изменить</button>
+                    <button onClick={() => edit()} className={'listBtn'} id={'editBtn'}>изменить</button>
 
 
                     <div className={'cartIcon-'+theme}>
