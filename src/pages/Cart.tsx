@@ -13,6 +13,7 @@ const Cart = () => {
     const [total, setTotal] = useState(0);
     const navigate = useNavigate();
     const initialValue = 0;
+    const theme = localStorage.getItem('theme');
 
 
     useEffect(() => {
@@ -67,37 +68,43 @@ const removeFromCart = async (id: string) => {
         .catch(e=> console.log(e))
 }
     return (
-        <div className={'margin'}>
-            <Link to='/' className={'btn margin'}>Вернуться на главную</Link>
+        <div className={' body-' + theme}>
+            <div className={'margin'}>
+                <Link to='/' className={`btn-${theme} margin`}>Вернуться на главную</Link>
 
-            <h1>Корзина:</h1>
-            <ul>
-                {cartItems && cartItems.map((item) => {
-                    if (item.isInCart) {
-                        return (
-                            <div key={item.id} className={''}>
-                                <Item
-                                    name={item.title}
-                                    price={item.price * item.amount}
-                                    amount={item.amount}
-                                    src={`/assets/${item.img}`}/>
-                                <h2>
-                                    x{item.amount}
-                                    <Button style={{width: '100px', height: '50px'}} purpose={'убрать'} press={() => {
-                                        removeFromCart(item.id)
-                                    }}/>
-                                </h2>
+                <h1>Корзина:</h1>
+                <ul>
+                    {cartItems && cartItems.map((item) => {
+                        if (item.isInCart) {
+                            return (
+                                <div key={item.id} className={''}>
+                                    <Item
+                                        name={item.title}
+                                        price={item.price * item.amount}
+                                        amount={item.amount}
+                                        src={`/assets/${item.img}`} />
+                                    <h2>
+                                        x{item.amount}
+                                        <Button style={{ width: '100px', height: '50px' }} purpose={'убрать'}
+                                                press={() => {
+                                                    removeFromCart(item.id)
+                                                }} />
+                                    </h2>
 
-                                <hr/>
-                            </div>
-                        )
-                    }
-                })}
-            </ul>
+                                    <hr />
+                                </div>
+                            )
+                        }
+                    })}
+                </ul>
 
-            <div className={'flexItem'} style={{width: '500px'}}>
-                <h3 style={{display: 'block'}}>Итого: {total}₽</h3>
-                <Button purpose={'перейти к оплате'} press={() => alert(`с вас ${total}₽ оплатите улыбкой :)`)}/>
+                <div className={'flexItem'} style={{ width: '500px' }}>
+                    <h3 style={{ display: 'block' }}>Итого: {total}₽</h3>
+                    <Button purpose={'перейти к оплате'} press={() => alert(`с вас ${total}₽ оплатите улыбкой :)`)} />
+                </div>
+            </div>
+            <div className={'footer-' + theme}>
+                <h4>made by <a href={'https://github.com/dashagenze'}>dasha</a> w💕</h4>
             </div>
 
         </div>

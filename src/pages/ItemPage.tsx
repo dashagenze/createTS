@@ -15,6 +15,7 @@ const ItemPage = () => {
     const params = useParams();
     const navigate = useNavigate();
 
+    const theme = localStorage.getItem('theme');
 
     useEffect(() => {
         setItemId(params.id || '');
@@ -75,20 +76,30 @@ const ItemPage = () => {
     }
 
     return (
-        <div className={'margin'}>
-            <Link className={'btn margin'} to='/'>Вернуться на главную</Link>
-            <div>
-                <div>
-                    <img src={`/assets/${item.img}`} className={'picture'}/>
-                    <h1>{item.title}</h1>
-                    <h1>{item.price}₽</h1>
+
+            <div className={` body-${theme}`}>
+                <div className={`margin`}>
+                    <Link className={`btn-${theme} margin`} to='/'>Вернуться на главную</Link>
+                    <div>
+                        <div>
+                            <img src={`/assets/${item.img}`} className={'picture'} />
+                            <h1>{item.title}</h1>
+                            <h1>{item.price}₽</h1>
+                        </div>
+                    </div>
+
+                    <Button press={() => addItemToCart()} purpose={'ДОБАВИТЬ В КОРЗИНУ'} />
+                    <Button press={() => navigate('/cart')} purpose={'ПЕРЕЙТИ К КОРЗИНЕ'} />
+                </div>
+
+                <div className={'footer-' + theme}>
+                    <h4>made by <a href={'https://github.com/dashagenze'}>dasha</a> w💕</h4>
                 </div>
             </div>
-
-            <Button press={() => addItemToCart()} purpose={'ДОБАВИТЬ В КОРЗИНУ'}/>
-            <Button press={()=> navigate('/cart')} purpose={'ПЕРЕЙТИ К КОРЗИНЕ'}/>
-        </div>
     )
+
+
+
 }
 
 

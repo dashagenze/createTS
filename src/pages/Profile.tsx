@@ -1,88 +1,98 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../App.css'
 // @ts-ignore
-import hi from '../assets/hi.png'
+import hi from '../assets/obed.jpg'
 import {Link} from "react-router-dom";
 // @ts-ignore
 import cartImg from '../assets/shopping_cart.png'
 
-type Profile = (name: string, surname: string) => { };
-type SetFunc = (set: (e: string)=> void, e: React.ChangeEvent<HTMLInputElement>) => void;
-type SubmitFunc = () => void
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../state/store.ts'
+import {
+    changeName,
+    changeSurname
+} from '../state/profile/profileSlice.ts'
+
+
+
+// type SetFunc = (set: (e: string)=> void, e: React.ChangeEvent<HTMLInputElement>) => void;
+type OnChangeFunction = () => void
 
 function Profile() {
 
-    const [name, setName] = useState<string>('');
-    const [surname, setSurname] = useState('');
-    // const [counter, setCounter] = useState(null)
-    const [user, setUser] = useState({  })
+    // const [isVisible, setIsVisible] = useState<boolean>(true);
+    const name = useSelector((state: RootState) => state.profile.name)
+    const surname = useSelector((state: RootState) => state.profile.surname)
+    const dispatch = useDispatch<AppDispatch>();
+    const theme = localStorage.getItem('theme');
+    
 
-    const createUser: Profile = useCallback((name, surname) => {
-        const user = {name, surname};
-        console.log(user)
-        return user
-    }, [name, surname])
 
-    const genUser = useMemo(()=> createUser(name, surname), [name, surname])
-
-    const submit: SubmitFunc = () => {
-        if(name && surname) {
-            setUser(genUser)
-            console.log(user);
-        } else if (!name && !surname) { alert('введите данные')}
+    const submit: OnChangeFunction = () => {
+        dispatch(changeName(name));
+        dispatch(changeSurname(surname));
+        localStorage.setItem('name', name);
+        localStorage.setItem('surname', surname);
+        const inputField  = document.getElementById('inputField');
+        if (inputField) inputField.style.display = 'none';
+        location.reload()
     }
 
-    const onNameChange: SetFunc = (set, e) => {
-        set(e.target.value)
+    const edit: OnChangeFunction = () => {
+        const inputField  = document.getElementById('inputField');
+        if (inputField) inputField.style.display = 'block';
+
     }
+
+    const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeName(e.target.value))
+    }
+
+    const onSurnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeSurname(e.target.value))
+    }
+
 
     useEffect(() => {
-        console.log(name)
-        console.log(surname)
-    }, [name, surname]);
+        console.log(localStorage.getItem('name'))
+        console.log(localStorage.getItem('surname'))
 
-    if (!user) {
+    }, [name, surname])
+
         return (
-            <div>
-                <img className={'progPic'} src={hi}/>
+            <div className={'body-'+theme}>
+                <Link to='/' className={`btn-${theme} margin`}>Вернуться на главную</Link>
+                <img className={'progPic'} src={hi}  />
                 <div className={'profile'}>
 
-                    <label>
-                    введите Ваше имя
-                    <input type={"text"} onChange={(e) => onNameChange(setName, e)}/>
-                    </label>
-                    <br/>
+                    <h2>Привет, {localStorage.getItem('name')} {localStorage.getItem('surname')}!</h2>
 
-                    <label>
-                    введите Вашу фамилию
-                    <input type={"text"} onChange={(e) => onNameChange(setSurname, e)}/>
-                    </label>
+                    <div id={'inputField'} style={{display: 'none'}}>
+                        <label>
+                            введите Ваше имя
+                            <input type={'text'} onChange={(e) => onNameChange(e)} />
+                        </label>
+                        <br />
+                        <label>
+                            введите Вашу фамилию
+                            <input type={'text'} onChange={(e) => onSurnameChange(e)} />
+                        </label>
+                        <br />
+                        <button onClick={() => submit()} className={'listBtn'}>подтвердить</button>
+                    </div>
 
-                    <br/>
-                    <button onClick={() => submit()} className={'listBtn'}>изменить</button>
+                    <button onClick={() => edit()} className={'listBtn'}>изменить</button>
 
+
+                    <div className={'cartIcon-'+theme}>
+                        <Link className={'hover'} to={'/profile'}>
+                        <img src={cartImg} />
+                        <p>перейти к корзине пользователя { name === 'Пользователь'? '' : name}</p>
+                        </Link>
+                    </div>
                 </div>
             </div>
         )
-    } else if (user) {
-        return (
-            <div className={'profile'}>
-                <img className={'progPic'} src={hi}/>
-                Привет, {name} {surname}!
-                {/*<button onClick={() => setCounter(counter + 1)}>вы нажали {counter} раз</button>*/}
-                <br/>
-                <button onClick={()=> alert('напишите разработчику, чтобы добавить взаимодействие с сервером!')}>Изменить имя</button>
-
-                <div className={'cartIcon'}>
-                    <Link className={'hover'} to={'/cart'}>
-                        <img src={cartImg}/>
-                        <p>перейти к корзине пользователя {name}</p>
-                    </Link>
-                </div>
-            </div>
-        )
-    }
-
 
 }
 

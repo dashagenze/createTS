@@ -16,25 +16,28 @@ const Search = () => {
     if (isLoading) {
         return <div>Загружаем товары...</div>;
     }
+    const theme = localStorage.getItem('theme');
+
 
     return (
-        <div className={'searchField'}>
-            <h2 >Найти товар:</h2>
-            <SearchInput searchValue={value} setValue={setValue}/>
+            <div className={'searchField-'+theme}>
+                <h2>Найти товар:</h2>
+                <SearchInput searchValue={value} setValue={setValue} />
 
-            <ul>
-                {itemsList && itemsList.map((item) => {
-                    if (item.title.includes(value) && value !== '') {
-                    return (
-                        <li key={item.id}>
-                            <Link to={'/'+item.id}>{item.title}</Link>
-                        </li>
-                    )}
-                })}
-            </ul>
+                <ul>
+                    {itemsList && itemsList.map((item) => {
+                        if (item.title.includes(value) && value !== '') {
+                            return (
+                                <li key={item.id}>
+                                    <Link to={'/' + item.id}>{item.title}</Link>
+                                </li>
+                            )
+                        }
+                    })}
+                </ul>
 
-            {/*<button >find an item</button>*/}
-        </div>
+                {/*<button >find an item</button>*/}
+            </div>
     )
 }
 

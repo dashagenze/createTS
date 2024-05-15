@@ -7,6 +7,7 @@ const ShopList = () => {
 
     const [item, setItem] = useState('')
     const [items, setItems] = useState<string[]>([])
+    const theme = localStorage.getItem('theme');
 
     const addItem = () => {
             if (item !== '') {
@@ -24,14 +25,12 @@ const ShopList = () => {
 
 
     return (
-        <div className={'shopList'}>
+        <div className={'shopList-'+theme}>
             <h1>Список покумпок</h1>
             <TasksList list={items}  remove={removeItem} />
             <TextInput item={item} setItem={setItem} addItem={addItem}/>
-            {/*<Button onClick={() => pressList()} purpose={'Посмотреть список'}/>*/}
         </div>
     )
 }
 
 export default ShopList
-// export default React.memo(ShopList);
