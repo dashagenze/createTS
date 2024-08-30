@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import '../App.css'
-import ItemsList from "../modules/ItemsList";
+import '../../App.css'
+import ItemsList from "../../modules/ItemsList.tsx";
 
 const EmptyCart = () => {
     const theme = localStorage.getItem('theme');

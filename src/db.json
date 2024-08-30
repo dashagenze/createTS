@@ -1,4 +1,7 @@
 {
+  'Sessions': [
+
+  ],
   "ItemsData": [
     {
       "id": "1",
@@ -43,5 +46,22 @@
       "price": 333
     }
   ],
-  "CartItems": []
+  "CartItems": [
+    {
+      "id": "1",
+      "title": "Очки для компьютера Xiaomi MiJia Blu-ray Goggles Pro Transparent (HMJ02TS) Clear",
+      "price": 1771,
+      "img": "xiaomi.jpg",
+      "amount": 2,
+      "isInCart": true
+    },
+    {
+      "id": "2",
+      "title": " \"13,3\" Ноутбук Apple MacBook Air M1/8/256 ГБ MGN63 серый",
+      "price": 74670,
+      "img": "macbook.jpg",
+      "amount": 1,
+      "isInCart": true
+    }
+  ]
 }

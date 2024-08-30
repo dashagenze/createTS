@@ -1,12 +1,8 @@
 import {Link} from 'react-router-dom';
 import '../App.css'
-// @ts-ignore
 import programmer from '../assets/programmer.jpg';
-// @ts-ignore
-import cartImg from '../assets/shopping_cart.png'
-// @ts-ignore
-import profile from '../assets/profile.png'
-
+import cartImg from '../assets/shopping_cart.png';
+import profile from '../assets/profile.png';
 
 import ShopList from "./ShopList";
 import Welcome from "../ui/createh1.ts";
@@ -15,22 +11,26 @@ import ItemsList from "../modules/ItemsList.tsx";
 import  { useState } from 'react'
 import { ThemeContext } from '../main.tsx'
 import ContrastIcon from '@mui/icons-material/Contrast';
+import Login from "./Login/Login.tsx";
+// import {useAxios} from "../hooks/getItems.ts";
 
 // const LINK = 'http://localhost:3000/ItemsData'
 
 const Home = () => {
 
-    const name = localStorage.getItem('name')
-    const surname = localStorage.getItem('surname')
+    const name = localStorage.getItem('name');
+    const surname = localStorage.getItem('surname');
     const [currentTheme, setCurrentTheme] = useState<string>('light');
+
+    // useAxios('http://localhost:3000/CartItems');
 
     const themeSwitch = (currtheme: string) => {
         if (currtheme === 'light') {
-            setCurrentTheme('dark')
-            localStorage.setItem('theme', 'dark')
+            setCurrentTheme('dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            setCurrentTheme('light')
-            localStorage.setItem('theme', 'light')
+            setCurrentTheme('light');
+            localStorage.setItem('theme', 'light');
         }
     }
 
@@ -44,6 +44,7 @@ const Home = () => {
                     <div>
                         <img src={profile} className={'profileIcon'} />
                         <Link to={'/profile'}>ЛИЧНЫЙ КАБИНЕТ </Link>
+                        <Link to={'/login'}> ВОЙТИ </Link>
 
                         <button className={'btn-' + theme} onClick={() => themeSwitch(currentTheme)}>
                             <ContrastIcon />
@@ -52,6 +53,9 @@ const Home = () => {
                     <p>{name} {surname}</p>
                     <Welcome />
 
+                    <Login>
+
+                    </Login>
                     <ShopList />
                     <img src={programmer} className={'progPic'} />
 

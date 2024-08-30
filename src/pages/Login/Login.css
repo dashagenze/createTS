@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.box {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 50px;
+    margin: 50px;
+}
+
+.textField {
+    padding: 50px;
+    margin: 50px;
+    height: 120%;
+}
+
+:required {
+   border: indianred 1px solid;
+}
+
+input[type="text"]:valid{
+    background-color: lightgreen;
+}
+
+input[type="text"]:invalid{
+    background-color: coral;
+}

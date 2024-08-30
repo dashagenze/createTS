@@ -1,14 +1,25 @@
-import '../App.css'
+import '../../App.css'
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import Item from "../modules/Item";
-import Button from "../ui/Button";
-import { IItem } from '../types/IItem.ts'
-
+import Item from "../../modules/Item.tsx";
+import Button from "../../ui/Button.tsx";
+import { IItem } from '../../types/IItem.ts'
+import {getItems} from "../../hooks/getItems.ts";
 
 const LINKTOCART = 'http://localhost:3000/CartItems'
-const Cart = () => {
 
+
+// const delay = (callback, timer) => {
+//     return new Promise((resolve) => setTimeout(() => {
+//         resolve(callback())
+//     }, timer))
+// }
+//
+// const result = await delay()
+
+
+
+const Cart = () => {
     const [cartItems, setCartItems] = useState<IItem[]> ([]);
     const [total, setTotal] = useState(0);
     const navigate = useNavigate();
@@ -17,17 +28,18 @@ const Cart = () => {
 
 
     useEffect(() => {
-        fetch(LINKTOCART)
-            .then(response => response.json())
-            .then(result => {
-                setCartItems(result)
-                if (!result.length) {
-                    navigate('/error/emptycart')
-                }
-                console.log(cartItems)
+        getItems(LINKTOCART)
+        console.log(cartItems)
 
-            })
-            .catch(e=> console.log(e))
+        // fetch(LINKTOCART)
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         setCartItems(result)
+        //         if (!result.length) {
+        //             navigate('/error/emptycart')
+        //         }
+        //     })
+        //     .catch(e=> console.log(e))
     }, []);
 
     useEffect(() => {

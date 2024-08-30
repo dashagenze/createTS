@@ -5,7 +5,7 @@ function Welcome({}) {
     return createElement(
         'h1',
         { className: 'greeting' },
-        'Добро пожаловать в интернет-магазин для программистов!!'
+        'Добро пожаловать в PROShop!!'
     );
 }
 

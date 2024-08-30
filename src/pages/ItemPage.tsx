@@ -4,8 +4,8 @@ import Button from "../ui/Button";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import { IItem } from '../types/IItem.ts'
 
-const LINKTOCART = 'http://localhost:3000/CartItems/'
-const LINK = 'http://localhost:3000/ItemsData/'
+const LINKTOCART = 'http://localhost:3000/CartItems/';
+const LINK = 'http://localhost:3000/ItemsData/';
 
 const ItemPage = () => {
 
@@ -23,7 +23,7 @@ const ItemPage = () => {
             if(!itemId) return
             fetch(LINK + itemId)
                 .then(response => {
-                    if (response.status === 404) navigate('/error/404')
+                    if (response.status === 404) navigate('/error/404');
                     return response.json();
 
                 })
@@ -38,7 +38,7 @@ const ItemPage = () => {
 
     const addItemToCart = async () => {
         try {
-            const response = await fetch(LINKTOCART+itemId)
+            const response = await fetch(LINKTOCART+itemId);
             const data = await response.json();
             const test = {amount: data.amount};
                 if (response.status === 200) {
